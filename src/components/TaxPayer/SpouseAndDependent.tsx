@@ -32,7 +32,7 @@ const toSpouse = (formData: UserPersonForm): Person => ({
 })
 
 export const AddDependentForm = (): ReactElement => {
-  const { register, errors, handleSubmit, getValues, reset } = useForm<UserDependentForm>()
+  const { register, errors, handleSubmit, control, getValues, reset } = useForm<UserDependentForm>()
 
   const [addingDependent, newDependent] = useState(false)
 
@@ -52,6 +52,7 @@ export const AddDependentForm = (): ReactElement => {
         <PersonFields
           register={register}
           errors={errors}
+          control={control}
         />
         <LabeledInput
           label="Relationship to taxpayer"
@@ -75,7 +76,7 @@ export const AddDependentForm = (): ReactElement => {
 }
 
 export const SpouseInfo = (): ReactElement => {
-  const { register, errors, handleSubmit, getValues } = useForm<UserPersonForm>()
+  const { register, errors, handleSubmit, control, getValues } = useForm<UserPersonForm>()
   const [editSpouse, updateEditSpouse] = useState(false)
   const dispatch = useDispatch()
 
@@ -97,6 +98,7 @@ export const SpouseInfo = (): ReactElement => {
         <PersonFields
           register={register}
           errors={errors}
+          control={control}
         />
       </FormContainer>
     )

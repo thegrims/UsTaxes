@@ -26,6 +26,7 @@ export interface LabeledInputProps extends BaseFormProps {
   required?: boolean
   name: string
   defaultValue?: string
+  control?: Control
 }
 
 export interface LabeledCheckBoxProps {

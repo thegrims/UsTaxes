@@ -9,15 +9,16 @@ import { BaseFormProps } from '../types'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ListItemText from '@material-ui/core/ListItemText'
 import PersonIcon from '@material-ui/icons/Person'
-import { DeepMap, FieldError } from 'react-hook-form'
+import { DeepMap, FieldError, Control } from 'react-hook-form'
 
 interface PersonFieldsProps<T extends Person> extends BaseFormProps {
   defaults?: T
   children?: ReactNode
   errors: DeepMap<Partial<Person>, FieldError>
+  control: Control
 }
 
-export const PersonFields = <T extends Person>({ register, errors, defaults, children }: PersonFieldsProps<T>): ReactElement => (
+export const PersonFields = <T extends Person>({ register, errors, defaults, children, control }: PersonFieldsProps<T>): ReactElement => (
   <div>
     <LabeledInput
       label="First Name and Initial"
@@ -45,6 +46,7 @@ export const PersonFields = <T extends Person>({ register, errors, defaults, chi
       required={true}
       error={errors.ssid}
       defaultValue={defaults?.ssid}
+      control={control}
     />
     {children}
   </div>

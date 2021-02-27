@@ -3,11 +3,11 @@ import { TextField, Box } from '@material-ui/core'
 import { LabeledInputProps } from './types'
 import NumberFormat from 'react-number-format'
 import { InputType } from '../Patterns'
+import { Controller } from 'react-hook-form'
 
 export function LabeledInput (props: LabeledInputProps): ReactElement {
-  const { strongLabel, label, register, error, required = false, patternConfig = { inputType: InputType.text }, name, defaultValue } = props
+  const { strongLabel, label, register, error, required = false, patternConfig = { inputType: InputType.text }, name, defaultValue, control } = props
 
-  //  let helperText: string | undefined
   // fix error where pattern wouldn't match if input wasn't filled out even if required was set to false
   if (!required) {
     patternConfig.regexp = /.?/
@@ -35,16 +35,34 @@ export function LabeledInput (props: LabeledInputProps): ReactElement {
 
   if (patternConfig.inputType === InputType.numeric) {
     input = (
-      <NumberFormat
-        mask={patternConfig.mask}
-        thousandSeparator={patternConfig.thousandSeparator}
-        prefix={patternConfig.prefix}
-        allowEmptyFormatting={true}
-        format={patternConfig.format}
-        customInput={TextField}
-        isNumericString={true}
-        {...textFieldProps}
+      <Controller
+        as={
+          <NumberFormat
+            customInput={TextField}
+            thousandSeparator={true}
+            prefix={'$ '}
+            onValueChange={(v) => {
+              // value without dollar signe
+              console.log(v.value)
+            }}
+          />
+        }
+        name='amount'
+        variant='filled'
+        defaultValue='20000'
+        control={control}
       />
+
+      // <NumberFormat
+      //   mask={patternConfig.mask}
+      //   thousandSeparator={patternConfig.thousandSeparator}
+      //   prefix={patternConfig.prefix}
+      //   allowEmptyFormatting={true}
+      //   format={patternConfig.format}
+      //   customInput={TextField}
+      //   isNumericString={true}
+      //   {...textFieldProps}
+      // />
     )
   }
 

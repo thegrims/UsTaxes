@@ -63,6 +63,7 @@ export default function TaxPayerInfo ({ navButtons, onAdvance }: PagedFormProps)
           patternConfig={Patterns.zip}
           required={!isForeignCountry}
           defaultValue={taxPayer?.primaryPerson?.address.zip}
+          control={control}
         />
       </div>
     )
@@ -109,6 +110,7 @@ export default function TaxPayerInfo ({ navButtons, onAdvance }: PagedFormProps)
           register={register}
           errors={errors}
           defaults={taxPayer?.primaryPerson}
+          control={control}
         />
         <LabeledInput
           label="Address"
